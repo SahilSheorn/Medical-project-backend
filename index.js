@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 require('dotenv').config();
-const port = 5000;
+const port = 5100;
 
 const dbConnection = require("./config/dbConnection.js");
 const { gets, addUser, getAllUsers } = require("./controller/userController.js");
