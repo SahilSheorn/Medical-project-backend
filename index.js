@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 require('dotenv').config();
 const port = 5000;
-
+const docRouter = require("./Router/auth.js")
 const dbConnection = require("./config/dbConnection.js");
 const { gets, addUser, getAllUsers } = require("./controller/userController.js");
 const {register, login, forgetPassword, getUserDetails, updateUsername,updateUsernameInDB } = require("./controller/loginController.js");
@@ -15,6 +15,9 @@ app.use(express.json());
 
 dbConnection();
 
+
+
+app.use("/api/auth",docRouter)
 app.post("/register", register);
 app.post("/login", login);
 app.post("/forget-password", forgetPassword);
@@ -24,7 +27,7 @@ app.post("/user", addUser);
 app.get("/users", getAllUsers);
 
 app.post("/doctor", addData)
-app.get("/doctor", getData);
+// app.get("/doctor", getData);
 
 app.get("/protected", verifyToken, (req, res) => {
   res.json({ message: "Protected endpoint accessed", user: req.user });

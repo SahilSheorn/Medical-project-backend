@@ -1,4 +1,7 @@
+
 {
+
+  "type": "commonjs",
   "scripts": {
     "start": "nodemon index.js",
     "build": "npm i"
