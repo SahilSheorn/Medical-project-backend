@@ -6,16 +6,22 @@ const addData = async (req, res) => {
         if (!name || !desigination) {
             return res.status(400).json({ error: "Please fill all the fields" });
         }
+
         const isname = await Doctor.findOne({ name });
         if (isname) {
             return res.status(400).json({ error: "Doctor with this name already exists" });
+        }
+
+        const isdrId = await Doctor.findOne({ drId });
+        if (isdrId) {
+            return res.status(400).json({ error: "Doctor with this ID already exists" });
         }
 
         const newDr = new Doctor({
             image,
             drId,
             name,
-            desigination, 
+            desigination,
             status
         });
 
@@ -67,8 +73,8 @@ const updateData = async (req, res) => {
 
 const deleteData = async (req, res) => {
     try {
-        const { _id} = req.params;
-        console.log("doctor id =",_id);
+        const { _id } = req.params;
+        console.log("doctor id =", _id);
         const deletedDoctor = await Doctor.findByIdAndDelete(_id);
         if (!deletedDoctor) {
             return res.status(404).json({ error: "Doctor not found" });
